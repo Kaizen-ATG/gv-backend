@@ -25,4 +25,13 @@ functions:
       - httpApi:
           path: /users/{userId}/user
           method: get
+  redeem-offers:
+    handler: CsharpHandlers::AwsDotnetCsharp.Handler::GetRedeemOffers
+    package:
+      artifact: bin/Release/netcoreapp3.1/gv-api.zip
+    events:
+      - httpApi:
+          path: /redeemoffers
+          method: get
+
 

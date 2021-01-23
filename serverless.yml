@@ -17,13 +17,21 @@ package:
   individually: true
 
 functions:
+  get-user:
+    handler: CsharpHandlers::AwsDotnetCsharp.Handler::GetUser
+    package:
+      artifact: bin/Release/netcoreapp3.1/gv-api.zip
+    events:
+      - httpApi:
+          path: /users/{userId}/user
+          method: get
   get-users:
     handler: CsharpHandlers::AwsDotnetCsharp.Handler::GetUsers
     package:
       artifact: bin/Release/netcoreapp3.1/gv-api.zip
     events:
       - httpApi:
-          path: /users/{userId}/user
+          path: /users
           method: get
   redeem-offers:
     handler: CsharpHandlers::AwsDotnetCsharp.Handler::GetRedeemOffers

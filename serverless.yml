@@ -7,17 +7,22 @@ provider:
   lambdaHashingVersion: 20201221
   region: eu-west-2
   profile: serverless
+  environment: 
+    DB_HOST: ${file(./config.db.json):DB_HOST}
+    DB_NAME: ${file(./config.db.json):DB_NAME}
+    DB_USER: ${file(./config.db.json):DB_USER}
+    DB_PASSWORD: ${file(./config.db.json):DB_PASSWORD}
 
 package:
   individually: true
 
 functions:
-  gv-api:
-    handler: CsharpHandlers::AwsDotnetCsharp.Handler::Hello
+  get-users:
+    handler: CsharpHandlers::AwsDotnetCsharp.Handler::GetUsers
     package:
-      artifact: bin/Release/netcoreapp3.1/hello.zip
+      artifact: bin/Release/netcoreapp3.1/gv-api.zip
     events:
       - httpApi:
-          path: /users
+          path: /users/{userId}/user
           method: get
 

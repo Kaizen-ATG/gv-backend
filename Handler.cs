@@ -118,7 +118,7 @@ namespace AwsDotnetCsharp
             string requestBody = request.Body;
             User u = JsonSerializer.Deserialize<User>(requestBody);
             LambdaLogger.Log("Saving user info: " + u.UserId);
-            
+
             return new APIGatewayProxyResponse
             {
                 Body = "user info Saved",
@@ -131,8 +131,47 @@ namespace AwsDotnetCsharp
             };
 
         }
+
+        public APIGatewayProxyResponse SaveUserPoints(APIGatewayProxyRequest request)
+        {
+            string requestBody = request.Body;
+            UserPoints up = JsonSerializer.Deserialize<UserPoints>(requestBody);
+            LambdaLogger.Log("Saving user points info: " + up.UserId);
+
+            return new APIGatewayProxyResponse
+            {
+                Body = "user points Saved",
+                Headers = new Dictionary<string, string>
+            {
+                { "Content-Type", "application/json" },
+                { "Access-Control-Allow-Origin", "*" }
+            },
+                StatusCode = 200,
+            };
+
+        }
+
     }
 
+    public class UserPoints
+    {
+        public int UserId { get; set; }
+        public int GreenPoints { get; set; }
+        public int CarbonPoints { get; set; }
+        public int WeekGP { get; set; }
+        public int WeekCP { get; set; }
+
+        public UserPoints() { }
+
+        public UserPoints(int user_id, int green_points, int carbon_points, int weekGP, int weekCP)
+        {
+            UserId = user_id;
+            GreenPoints = green_points;
+            CarbonPoints = carbon_points;
+            WeekGP = weekGP;
+            WeekCP = weekCP;
+        }
+    }
     public class User
     {
         public int UserId { get; set; }

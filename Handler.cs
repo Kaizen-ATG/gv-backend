@@ -33,7 +33,7 @@ namespace AwsDotnetCsharp
 
             while (reader.Read())
             {
-                User user = new User(reader.GetInt16("user_id"), reader.GetString("username"), reader.GetString("email"),reader.GetInt16("role_id"));
+                User user = new User(reader.GetInt16("user_id"), reader.GetString("username"), reader.GetString("email"), reader.GetInt16("role_id"));
                 users.Add(user);
             }
 
@@ -65,7 +65,7 @@ namespace AwsDotnetCsharp
 
             while (reader.Read())
             {
-                User user = new User(reader.GetInt16("user_id"), reader.GetString("username"), reader.GetString("email"),reader.GetInt16("role_id"));
+                User user = new User(reader.GetInt16("user_id"), reader.GetString("username"), reader.GetString("email"), reader.GetInt16("role_id"));
                 users.Add(user);
             }
 
@@ -96,7 +96,7 @@ namespace AwsDotnetCsharp
             while (reader.Read())
             {
                 RedeemOffers offer = new RedeemOffers
-                                    (reader.GetString("deal_type"), reader.GetInt16("points_required"), reader.GetString("deal_code"),reader.GetString("description"));
+                                    (reader.GetString("deal_type"), reader.GetInt16("points_required"), reader.GetString("deal_code"), reader.GetString("description"));
                 offers.Add(offer);
             }
 
@@ -113,6 +113,24 @@ namespace AwsDotnetCsharp
                 StatusCode = 200,
             };
         }
+        public APIGatewayProxyResponse SaveUser(APIGatewayProxyRequest request)
+        {
+            string requestBody = request.Body;
+            User u = JsonSerializer.Deserialize<User>(requestBody);
+            LambdaLogger.Log("Saving user info: " + u.UserId);
+            
+            return new APIGatewayProxyResponse
+            {
+                Body = "user info Saved",
+                Headers = new Dictionary<string, string>
+            {
+                { "Content-Type", "application/json" },
+                { "Access-Control-Allow-Origin", "*" }
+            },
+                StatusCode = 200,
+            };
+
+        }
     }
 
     public class User
@@ -120,16 +138,16 @@ namespace AwsDotnetCsharp
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public int  Role { get; set; }
+        public int Role { get; set; }
 
-        //public User() { }
+        public User() { }
 
-        public User(int user_id, string username, string email,int role_id)
+        public User(int user_id, string username, string email, int role_id)
         {
             UserId = user_id;
             UserName = username;
             Email = email;
-            Role=role_id;
+            Role = role_id;
         }
     }
     public class RedeemOffers
@@ -137,16 +155,16 @@ namespace AwsDotnetCsharp
         public string Dealtype { get; set; }
         public int PointsRequired { get; set; }
         public string Dealcode { get; set; }
-        public string  Description { get; set; }
+        public string Description { get; set; }
 
         //public RedeemOffers() { }
 
-        public RedeemOffers(string deal_type, int points_required, string deal_code,string description)
+        public RedeemOffers(string deal_type, int points_required, string deal_code, string description)
         {
             Dealtype = deal_type;
             PointsRequired = points_required;
             Dealcode = deal_code;
-            Description=description;
+            Description = description;
         }
     }
 }

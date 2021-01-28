@@ -101,14 +101,12 @@ namespace AwsDotnetCsharp
             string requestBody = request.Body;
             LambdaLogger.Log(requestBody);
             User user = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(requestBody);
-            LambdaLogger.Log("Saving user info: " + user.UserName);
             connection.Open();
             var cmd = connection.CreateCommand();
             cmd.CommandText = "INSERT INTO user(username,email,role_id) values(@name,@email,@role)";
             cmd.Parameters.AddWithValue("@name", user.UserName);
             cmd.Parameters.AddWithValue("@email", user.Email);
             cmd.Parameters.AddWithValue("@role", 501);
-            LambdaLogger.Log("Saving user info: " + cmd.CommandText);
             cmd.ExecuteNonQuery();
             connection.Close();
             return new APIGatewayProxyResponse
@@ -147,7 +145,6 @@ namespace AwsDotnetCsharp
                 StatusCode = 200,
             };
         }
-
     }
 
     public class User

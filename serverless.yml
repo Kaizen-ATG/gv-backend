@@ -41,5 +41,21 @@ functions:
       - httpApi:
           path: /redeemoffers
           method: get
+  save-user:
+    handler: CsharpHandlers::AwsDotnetCsharp.Handler::SaveUser
+    package:
+      artifact: bin/Release/netcoreapp3.1/gv-api.zip
+    events:
+      - httpApi:
+          path: /saveuser
+          method: post
+  save-userpoints:
+    handler: CsharpHandlers::AwsDotnetCsharp.Handler::SaveUserPoints
+    package:
+      artifact: bin/Release/netcoreapp3.1/gv-api.zip
+    events:
+      - httpApi:
+          path: /saveuserpoints
+          method: post
 
 

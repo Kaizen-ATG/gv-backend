@@ -63,7 +63,7 @@ functions:
       artifact: bin/Release/netcoreapp3.1/gv-api.zip
     events:
       - httpApi:
-          path: /deletecoupon
+          path: /deletecoupon/{dealCode}
           method: delete
 
 

@@ -145,6 +145,27 @@ namespace AwsDotnetCsharp
                 StatusCode = 200,
             };
         }
+        public APIGatewayProxyResponse DeleteCoupon(APIGatewayProxyRequest request)
+        {
+            string requestBody = request.Body;
+            LambdaLogger.Log(requestBody);
+            RedeemOffers RO = Newtonsoft.Json.JsonConvert.DeserializeObject<RedeemOffers>(requestBody);
+            connection.Open();
+            var cmd = connection.CreateCommand();
+            cmd.CommandText = "DELETE FROM redeemoffers(deal_code) values(@deal_code)";
+            cmd.Parameters.AddWithValue("@coupon", RO.Dealcode);
+            connection.Close();
+            return new APIGatewayProxyResponse
+            {
+                Body = "Coupon deleted",
+                Headers = new Dictionary<string, string>
+            {
+                { "Content-Type", "application/json" },
+                { "Access-Control-Allow-Origin", "*" }
+            },
+                StatusCode = 200,
+            };
+        }
     }
 
     public class User

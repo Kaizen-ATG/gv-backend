@@ -57,5 +57,13 @@ functions:
       - httpApi:
           path: /saveuserpoints
           method: post
+  delete-coupon:
+    handler: CsharpHandlers::AwsDotnetCsharp.Handler::DeleteCoupon
+    package:
+      artifact: bin/Release/netcoreapp3.1/gv-api.zip
+    events:
+      - httpApi:
+          path: /deletecoupon
+          method: delete
 
 

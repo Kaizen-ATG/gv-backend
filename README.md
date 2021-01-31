@@ -19,20 +19,21 @@ ESLint
 Endpoints
 The API exposes the following endpoints:
 
-GET /userinfo
+GET/userinfo
 GET - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/users/{userId}/user
 Responds with JSON containing all Users in the Database.
 
-GET /users
+GET/users
 GET - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/users
 
-GET /redeempoints
+
+
+GET/redeempoints
 GET - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/redeemoffers
 
-POST /userinfo
- POST - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/saveuser
- 
- 
+POST/userinfo
+POST - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/saveuser 
+
 {
     "UserName": "testuser",
     "Email": "123new@gmail.com"
@@ -51,7 +52,11 @@ POST - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/saveuserpoints
 
 
 Delete/coupon
-DELETE - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/deletecoupon
+DELETE - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/deletecoupon/{dealCode}
+
+{
+    "deal_code": "STAR12"
+}
 
 
 

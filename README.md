@@ -1,4 +1,6 @@
-greenvibe -Application - Backend
+![alt text](https://github.com/Kaizen-ATG/gv-common/blob/main/gv-logo.png "Green Vibe Logo")
+
+# Greenvibe - Backend
 
 This is the back end API of a greenvibe Application, built throughout the Tech Returners Your Journey Into Tech course. It is consumed by a front end React application, available here and connects to an RDS Database.
 

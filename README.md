@@ -26,8 +26,6 @@ Responds with JSON containing all Users in the Database.
 GET/users
 GET - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/users
 
-
-
 GET/redeempoints
 GET - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/redeemoffers
 
@@ -35,30 +33,23 @@ POST/userinfo
 POST - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/saveuser 
 
 {
-    "UserName": "testuser",
-    "Email": "123new@gmail.com"
+    "userid": "4ec20f9f-4eec-43b8-88ce-2d7f9af7cd66",
+    "username": "Osama",
+    "email": "test3@gmail.com"
 }
  
 POST /userpoints
 POST - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/saveuserpoints
 
 {
-    "green_points": 20,
-    "carbon_points": 35,
-    "weekGP": 15,
-    "WeekCP": 25,
-    "user_id": 11
+    "userid": "4ec20f9f-4eec-43b8-77ce-2d7f9af7cd66",
+    "greenpoints": 200,
+    "carbonpoints": 200,
+    "weekGP": 80,
+    "weekCP": 100
 }
 
 
 Delete/coupon
 DELETE - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/deletecoupon/{dealCode}
-
-{
-    "deal_code": "STAR12"
-}
-
-
-
-
 

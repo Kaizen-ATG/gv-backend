@@ -16,15 +16,24 @@ Endpoints
 The API exposes the following endpoints:
 
 GET /userinfo
+GET - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/users/{userId}/user
 Responds with JSON containing all Users in the Database.
 
 GET /users
-GET /redeempoints
+GET - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/users
 
+GET /redeempoints
+GET - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/redeemoffers
 
 POST /userinfo
+ POST - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/saveuser
+ 
 POST /userpoints
+POST - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/saveuserpoints
+
 Delete/coupon
+DELETE - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/deletecoupon
+
 
 
 

@@ -28,11 +28,27 @@ GET - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/redeemoffers
 POST /userinfo
  POST - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/saveuser
  
+ 
+{
+    "UserName": "testuser",
+    "Email": "123new@gmail.com"
+}
+ 
 POST /userpoints
 POST - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/saveuserpoints
 
+{
+    "green_points": 20,
+    "carbon_points": 35,
+    "weekGP": 15,
+    "WeekCP": 25,
+    "user_id": 11
+}
+
+
 Delete/coupon
 DELETE - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/deletecoupon
+
 
 
 

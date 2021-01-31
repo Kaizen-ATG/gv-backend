@@ -1,9 +1,13 @@
-greenvibe -Application - Backend
+![alt text](https://github.com/Kaizen-ATG/gv-common/blob/main/gv-logo.png "Green Vibe Logo")
 
-This is the back end API of a greenvibe Application, built throughout the Tech Returners Your Journey Into Tech course. It is consumed by a front end React application, available here and connects to an RDS Database.
+# Greenvibe - Backend
+
+This is the back end API for the Greenvibe Application, built throughout the Tech Returners Your Journey Into Tech course. It is consumed by a front-end React application, available here and connects to an RDS Database.
 
 The hosted version of the application is available here: https://github.com/Kaizen-ATG 
-Technology Used
+
+
+## Technology Used
 This project uses the following technology:
 Serverless Framework
 JavaScript 
@@ -15,20 +19,21 @@ ESLint
 Endpoints
 The API exposes the following endpoints:
 
-GET /userinfo
+GET/userinfo
 GET - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/users/{userId}/user
 Responds with JSON containing all Users in the Database.
 
-GET /users
+GET/users
 GET - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/users
 
-GET /redeempoints
+
+
+GET/redeempoints
 GET - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/redeemoffers
 
-POST /userinfo
- POST - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/saveuser
- 
- 
+POST/userinfo
+POST - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/saveuser 
+
 {
     "UserName": "testuser",
     "Email": "123new@gmail.com"
@@ -47,7 +52,11 @@ POST - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/saveuserpoints
 
 
 Delete/coupon
-DELETE - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/deletecoupon
+DELETE - https://eumdh35gzh.execute-api.eu-west-2.amazonaws.com/deletecoupon/{dealCode}
+
+{
+    "deal_code": "STAR12"
+}
 
 
 

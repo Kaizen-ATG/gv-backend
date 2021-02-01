@@ -26,14 +26,14 @@ namespace AwsDotnetCsharp
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"SELECT * FROM `user` inner join `userpoints` using(`user_id`) where `user_id`= @userId";
+                cmd.CommandText = @"select * from `user` inner join `userpoints` using(`user_id`) where `user_id`= @userId";
                 cmd.Parameters.AddWithValue("@userId", userId);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 ArrayList users = new ArrayList();
                 while (reader.Read())
                 {
                     UserDetail user = new UserDetail(reader.GetString("user_id"), reader.GetString("username"), reader.GetInt16("role_id"),
-                                          reader.GetInt16("green_points"),  reader.GetInt16("carbon_points"),reader.GetInt16("weekGP"),reader.GetInt16("weekCP"));
+                                          reader.GetInt16("green_points"), reader.GetInt16("carbon_points"), reader.GetInt16("weekGP"), reader.GetInt16("weekCP"));
                     users.Add(user);
                 }
                 return new APIGatewayProxyResponse
@@ -61,7 +61,7 @@ namespace AwsDotnetCsharp
                 while (reader.Read())
                 {
                     UserDetail user = new UserDetail(reader.GetString("user_id"), reader.GetString("username"), reader.GetInt16("role_id"),
-                                          reader.GetInt16("green_points"),  reader.GetInt16("carbon_points"),reader.GetInt16("weekGP"),reader.GetInt16("weekCP"));
+                                          reader.GetInt16("green_points"), reader.GetInt16("carbon_points"), reader.GetInt16("weekGP"), reader.GetInt16("weekCP"));
                     users.Add(user);
                 }
                 return new APIGatewayProxyResponse
@@ -83,7 +83,7 @@ namespace AwsDotnetCsharp
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"SELECT * FROM redeemoffers";
+                cmd.CommandText = @"select * from redeemoffers";
                 MySqlDataReader reader = cmd.ExecuteReader();
                 ArrayList offers = new ArrayList();
                 while (reader.Read())
@@ -139,8 +139,25 @@ namespace AwsDotnetCsharp
             using (connection)
             {
                 connection.Open();
+                var selectcmd = connection.CreateCommand();
+                selectcmd.CommandText = @"select * from userpoints where user_id=@userId";
+                selectcmd.Parameters.AddWithValue("@userId", pts.UserId);
+                MySqlDataReader reader = selectcmd.ExecuteReader();
+                int rowCount = 0;
+                while (reader.Read())
+                {
+                    rowCount++;
+                }
+                reader.Close();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = "INSERT INTO userpoints(green_points,carbon_points,weekGP,weekCP,user_id) values(@greenpts,@carbonpts,@wgpts,@wcpts,@userid)";
+                if (rowCount > 0)
+                {
+                    cmd.CommandText = "update userpoints set green_points=@greenpts,carbon_points=@carbonpts,weekGP=@wgpts,weekCP=@wcpts where user_id=@userid";
+                }
+                else
+                {
+                    cmd.CommandText = "insert into userpoints(green_points,carbon_points,weekGP,weekCP,user_id) values(@greenpts,@carbonpts,@wgpts,@wcpts,@userid)";
+                }
                 cmd.Parameters.AddWithValue("@greenpts", pts.GreenPoints);
                 cmd.Parameters.AddWithValue("@carbonpts", pts.CarbonPoints);
                 cmd.Parameters.AddWithValue("@wgpts", pts.WeekGP);
@@ -167,7 +184,7 @@ namespace AwsDotnetCsharp
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"DELETE FROM `redeemoffers` WHERE `deal_code` = @dealCode";
+                cmd.CommandText = @"delete from `redeemoffers` WHERE `deal_code` = @dealCode";
                 cmd.Parameters.AddWithValue("@dealCode", dealCode);
                 cmd.ExecuteNonQuery();
                 return new APIGatewayProxyResponse

@@ -26,13 +26,14 @@ namespace AwsDotnetCsharp
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"SELECT * FROM `user` WHERE `user_id` = @userId";
+                cmd.CommandText = @"SELECT * FROM `user` inner join `userpoints` using(`user_id`) where `user_id`= @userId";
                 cmd.Parameters.AddWithValue("@userId", userId);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 ArrayList users = new ArrayList();
                 while (reader.Read())
                 {
-                    User user = new User(reader.GetString("user_id"), reader.GetString("username"), reader.GetString("email"), reader.GetInt16("role_id"));
+                    UserDetail user = new UserDetail(reader.GetString("user_id"), reader.GetString("username"), reader.GetInt16("role_id"),
+                                          reader.GetInt16("green_points"),  reader.GetInt16("carbon_points"),reader.GetInt16("weekGP"),reader.GetInt16("weekCP"));
                     users.Add(user);
                 }
                 return new APIGatewayProxyResponse
@@ -54,12 +55,13 @@ namespace AwsDotnetCsharp
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"SELECT * FROM user";
+                cmd.CommandText = @"select * from `user` inner join `userpoints` using(`user_id`);";
                 MySqlDataReader reader = cmd.ExecuteReader();
                 ArrayList users = new ArrayList();
                 while (reader.Read())
                 {
-                    User user = new User(reader.GetString("user_id"), reader.GetString("username"), reader.GetString("email"), reader.GetInt16("role_id"));
+                    UserDetail user = new UserDetail(reader.GetString("user_id"), reader.GetString("username"), reader.GetInt16("role_id"),
+                                          reader.GetInt16("green_points"),  reader.GetInt16("carbon_points"),reader.GetInt16("weekGP"),reader.GetInt16("weekCP"));
                     users.Add(user);
                 }
                 return new APIGatewayProxyResponse
@@ -196,6 +198,28 @@ namespace AwsDotnetCsharp
             UserName = username;
             Email = email;
             Role = roleid;
+        }
+    }
+    public class UserDetail
+    {
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+        public int Role { get; set; }
+        public int GreenPoints { get; set; }
+        public int CarbonPoints { get; set; }
+        public int WeekGP { get; set; }
+        public int WeekCP { get; set; }
+        public UserDetail() { }
+
+        public UserDetail(string userid, string username, int roleid, int greenpoints, int carbonpoints, int weekGP, int weekCP)
+        {
+            UserId = userid;
+            UserName = username;
+            Role = roleid;
+            GreenPoints = greenpoints;
+            CarbonPoints = carbonpoints;
+            WeekGP = weekGP;
+            WeekCP = weekCP;
         }
     }
     public class RedeemOffers

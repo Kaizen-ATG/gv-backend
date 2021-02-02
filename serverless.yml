@@ -12,6 +12,8 @@ provider:
     DB_NAME: ${file(./config.db.json):DB_NAME}
     DB_USER: ${file(./config.db.json):DB_USER}
     DB_PASSWORD: ${file(./config.db.json):DB_PASSWORD}
+  httpApi:
+    cors: "*"
 
 package:
   individually: true

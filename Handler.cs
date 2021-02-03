@@ -55,7 +55,7 @@ namespace AwsDotnetCsharp
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"select * from `user` inner join `userpoints` using(`user_id`);";
+                cmd.CommandText = @"select * from `user` inner join `userpoints` using(`user_id`) order by green_points desc;";
                 MySqlDataReader reader = cmd.ExecuteReader();
                 ArrayList users = new ArrayList();
                 while (reader.Read())
@@ -83,7 +83,7 @@ namespace AwsDotnetCsharp
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"select * from redeemoffers";
+                cmd.CommandText = @"select * from redeemoffers order by points_required;";
                 MySqlDataReader reader = cmd.ExecuteReader();
                 ArrayList offers = new ArrayList();
                 while (reader.Read())

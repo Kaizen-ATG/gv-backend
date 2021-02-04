@@ -20,14 +20,14 @@ namespace AwsDotnetCsharp
         MySqlConnection connection = new MySqlConnection($"server={DB_HOST};user id={DB_USER};password={DB_PASSWORD};port=3306;database={DB_NAME};");
         public APIGatewayProxyResponse GetUser(APIGatewayProxyRequest request)
         {
-            string userId = request.PathParameters["userId"].ToString();
-            LambdaLogger.Log("Getting detials for: " + userId);
+            string email = request.PathParameters["email"].ToString().Trim();
+            LambdaLogger.Log("Getting detials for: " + email);
             using (connection)
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"select * from `user` inner join `userpoints` using(`user_id`) where `user_id`= @userId";
-                cmd.Parameters.AddWithValue("@userId", userId);
+                cmd.CommandText = @"select * from `user` left join `userpoints` using(`user_id`) where `email`= @value";
+                cmd.Parameters.AddWithValue("@value", email);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 ArrayList users = new ArrayList();
                 while (reader.Read())
@@ -114,7 +114,7 @@ namespace AwsDotnetCsharp
                 connection.Open();
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = "INSERT INTO user(user_id,username,email,role_id) values(@id,@name,@email,@role)";
-                cmd.Parameters.AddWithValue("@id", user.UserId);
+                cmd.Parameters.AddWithValue("@id", System.Guid.NewGuid());
                 cmd.Parameters.AddWithValue("@name", user.UserName);
                 cmd.Parameters.AddWithValue("@email", user.Email);
                 cmd.Parameters.AddWithValue("@role", 501);

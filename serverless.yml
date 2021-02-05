@@ -22,7 +22,7 @@ functions:
   get-user:
     handler: CsharpHandlers::AwsDotnetCsharp.Handler::GetUser
     package:
-      artifact: bin/Release/netcoreapp3.1/gv-api.zip
+      artifact: bin/Release/netcoreapp3.1/greenVibe-api.zip
     events:
       - httpApi:
           path: /users/{email}/user
@@ -30,7 +30,7 @@ functions:
   get-users:
     handler: CsharpHandlers::AwsDotnetCsharp.Handler::GetUsers
     package:
-      artifact: bin/Release/netcoreapp3.1/gv-api.zip
+      artifact: bin/Release/netcoreapp3.1/greenVibe-api.zip
     events:
       - httpApi:
           path: /users
@@ -38,7 +38,7 @@ functions:
   redeem-offers:
     handler: CsharpHandlers::AwsDotnetCsharp.Handler::GetRedeemOffers
     package:
-      artifact: bin/Release/netcoreapp3.1/gv-api.zip
+      artifact: bin/Release/netcoreapp3.1/greenVibe-api.zip
     events:
       - httpApi:
           path: /redeemoffers
@@ -46,7 +46,7 @@ functions:
   save-user:
     handler: CsharpHandlers::AwsDotnetCsharp.Handler::SaveUser
     package:
-      artifact: bin/Release/netcoreapp3.1/gv-api.zip
+      artifact: bin/Release/netcoreapp3.1/greenVibe-api.zip
     events:
       - httpApi:
           path: /saveuser
@@ -54,7 +54,7 @@ functions:
   save-userpoints:
     handler: CsharpHandlers::AwsDotnetCsharp.Handler::SaveUserPoints
     package:
-      artifact: bin/Release/netcoreapp3.1/gv-api.zip
+      artifact: bin/Release/netcoreapp3.1/greenVibe-api.zip
     events:
       - httpApi:
           path: /saveuserpoints
@@ -62,7 +62,7 @@ functions:
   delete-coupon:
     handler: CsharpHandlers::AwsDotnetCsharp.Handler::DeleteCoupon
     package:
-      artifact: bin/Release/netcoreapp3.1/gv-api.zip
+      artifact: bin/Release/netcoreapp3.1/greenVibe-api.zip
     events:
       - httpApi:
           path: /deletecoupon/{dealCode}

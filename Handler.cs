@@ -83,7 +83,7 @@ namespace AwsDotnetCsharp
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"select * from redeemoffers order by points_required;";
+                cmd.CommandText = @"select * from redeemoffers where isactive=true order by points_required;";
                 MySqlDataReader reader = cmd.ExecuteReader();
                 ArrayList offers = new ArrayList();
                 while (reader.Read())
